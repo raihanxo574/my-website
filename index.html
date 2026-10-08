@@ -2,52 +2,39 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Study Hub</title>
 <style>
 body{background:#0f172a;color:white;text-align:center;font-family:sans-serif;padding:20px}
 h1{color:#38bdf8}
-textarea{width:90%;padding:15px;border-radius:12px;font-size:16px}
+textarea{width:90%;max-width:500px;padding:15px;border-radius:12px;font-size:16px}
 button{background:#38bdf8;padding:14px 30px;border:none;border-radius:12px;font-size:18px;font-weight:bold;margin-top:15px;cursor:pointer}
-#ans{background:#1e293b;padding:15px;border-radius:12px;margin-top:20px;min-height:60px;text-align:left;white-space:pre-wrap;word-wrap:break-word}
+#ans{background:#1e293b;padding:15px;border-radius:12px;margin-top:20px;min-height:60px;text-align:left;white-space:pre-wrap;max-width:600px;margin-left:auto;margin-right:auto}
 </style>
 </head>
 <body>
 <h1>🔥 AI Study Hub 🔥</h1>
 <p>Vanakkam da! En AI website LIVE!</p>
-<textarea id="q" rows="4" placeholder="Enna doubt da? Eg: What is AI?"></textarea><br>
-<button id="btn" onclick="ask()">Ask AI 🤖</button>
-<div id="ans">Dei kelvi kelu da! Naan answer panren!</div>
+<textarea id="q" rows="4" placeholder="What is AI?"></textarea><br>
+<button id="b" onclick="ask()">Ask AI 🤖</button>
+<div id="ans">Dei kelvi kelu da!</div>
 <script>
-const k="AQ.Ab8RN6IUiAUosQ3zpzS2Kq-U_iYQAyetkMOIFTQT7buFpQhxww"
+const API_KEY="AQ.Ab8RN6J0yrVE6y-SkF727oDU4koU_QQX7IT1HG7Gtj6Z1ghZvQ";
 async function ask(){
-let qq=document.getElementById("q").value.trim();
-let aDiv=document.getElementById("ans");
-let btn=document.getElementById("btn");
-if(!qq){alert("Dei kelvi type pannu da!");return}
-btn.innerText="⏳ Yosikuren...";
-aDiv.innerText="⏳ AI yosikuthu da... konjam wait pannu...";
+let qq=document.getElementById("q").value;
+let a=document.getElementById("ans");
+let b=document.getElementById("b");
+if(!qq){alert("Kelvi type pannu da!");return}
+b.innerText="⏳ Yosikuthu..."; a.innerText="Yosikuthu da...";
 try{
-let res=await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key="+K,{
+let r=await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key="+API_KEY,{
 method:"POST",
 headers:{"Content-Type":"application/json"},
-body:JSON.stringify({contents:[{parts:[{text:qq}]}]})
-});
-let data=await res.json();
-console.log(data);
-if(data.error){
-aDiv.innerText="❌ API Error da: "+data.error.message+"\n\nDei key ah check pannu! aistudio.google.com/apikey la puthu key eduthu paste pannu!";
-btn.innerText="Ask AI 🤖";
-return;
-}
-if(data.candidates && data.candidates[0]){
-let txt=data.candidates[0].content.parts[0].text;
-aDiv.innerText=txt;
-}else{
-aDiv.innerText="❌ Response illa da: "+JSON.stringify(data).substring(0,300);
-}
-}catch(err){
-aDiv.innerText="❌ Network Error da: "+err.message;
-}
-btn.innerText="Ask AI 🤖";
+body:JSON.stringify({contents:[{parts:[{text:qq}]}]})});
+let d=await r.json();
+if(d.error){a.innerText="❌ Error: "+d.error.message; b.innerText="Ask AI 🤖"; return;}
+a.innerText=d.candidates[0].content.parts[0].text;
+}catch(e){a.innerText="❌ Error: "+e.message}
+b.innerText="Ask AI 🤖";
 }
 </script>
 </body>
