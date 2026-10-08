@@ -2,24 +2,40 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Raihan Website</title>
+<title>AI Study Hub</title>
 <style>
-body { font-family: sans-serif; text-align: center; padding-top: 100px; background: #f5f5f5; }
-h1 { font-size: 28px; }
-button { padding: 12px 25px; background: black; color: white; border: none; border-radius: 8px; font-size: 16px; }
-#msg { margin-top: 20px; font-size: 20px; font-weight: bold; color: green; display: none; }
+body{font-family:sans-serif;padding:20px;background:#0f172a;color:white;text-align:center}
+h1{color:#38bdf8}
+input,textarea{width:90%;padding:12px;margin:10px;border-radius:10px;border:none;font-size:16px}
+button{padding:12px 25px;background:#38bdf8;color:#000;border:none;border-radius:10px;font-weight:bold;font-size:18px;margin:10px}
+#ans{background:#1e293b;padding:15px;border-radius:10px;margin-top:20px;text-align:left;min-height:100px;white-space:pre-wrap}
 </style>
 </head>
 <body>
-<h1>Vanakkam da! 🔥</h1>
-<p>En first website live aayiduchu!</p>
-<button onclick="clicked()">Click Me</button>
-<p id="msg">Dei semma da! Nee developer aayita! 🎉🚀</p>
+<h1>🔥 AI Study Hub 🔥</h1>
+<p>Vanakkam da! En AI website LIVE!</p>
+<textarea id="q" rows="4" placeholder="Enna doubt da? Eg: Photosynthesis enna?"></textarea><br>
+<button onclick="ask()">Ask AI 🤖</button>
+<div id="ans">Dei kelvi kelu da! Naan answer panren!</div>
 <script>
-function clicked() {
-  document.getElementById('msg').style.display = 'block';
-  alert('Dei Raihan! Mass da nee! 🔥');
+const K="AIzaSyAb8RN6IUiAUosQ3zpzS2Kq-U_iYQAxxxx";
+async function ask(){
+ let qq=document.getElementById("q").value;
+ if(!qq){alert("Dei kelvi type pannu da!");return}
+ document.getElementById("ans").innerText="Yosikuren da... ⏳";
+ try{
+  let r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${K}`,{
+   method:"POST",
+   headers:{"Content-Type":"application/json"},
+   body:JSON.stringify({contents:[{parts:[{text:qq}]}]})
+  });
+  let d=await r.json();
+  let a=d.candidates[0].content.parts[0].text;
+  document.getElementById("ans").innerText=a;
+ }catch(e){
+  document.getElementById("ans").innerText="Dei API Key thappu da! PASTE_KEY_HERE la correct ah paste panniya check pannu! Error: "+e;
+ }
 }
 </script>
 </body>
-</html>
+  </html>
