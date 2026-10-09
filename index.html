@@ -1,40 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI Study Hub</title>
 <style>
 body{background:#0f172a;color:white;text-align:center;font-family:sans-serif;padding:20px}
-h1{color:#38bdf8}
-textarea{width:90%;max-width:500px;padding:15px;border-radius:12px;font-size:16px}
-button{background:#38bdf8;padding:14px 30px;border:none;border-radius:12px;font-size:18px;font-weight:bold;margin-top:15px;cursor:pointer}
-#ans{background:#1e293b;padding:15px;border-radius:12px;margin-top:20px;min-height:60px;text-align:left;white-space:pre-wrap;max-width:600px;margin-left:auto;margin-right:auto}
+h1{color:#38bdf8;font-size:28px}
+textarea{width:90%;max-width:500px;padding:14px;border-radius:12px;font-size:16px;border:none}
+button{background:#38bdf8;color:#0f172a;padding:14px 35px;border:none;border-radius:12px;font-size:18px;font-weight:bold;margin-top:12px;cursor:pointer}
+button:active{transform:scale(0.95)}
+#ans{background:#1e293b;padding:16px;border-radius:12px;max-width:600px;margin:25px auto;text-align:left;min-height:60px;white-space:pre-wrap;line-height:1.6}
+small{color:#94a3b8}
 </style>
 </head>
 <body>
 <h1>🔥 AI Study Hub 🔥</h1>
-<p>Vanakkam da! En AI website LIVE!</p>
-<textarea id="q" rows="4" placeholder="What is AI?"></textarea><br>
-<button id="b" onclick="ask()">Ask AI 🤖</button>
-<div id="ans">Dei kelvi kelu da!</div>
+<p>Vanakkam da! En AI website - NO KEY NEEDED!</p>
+<textarea id="q" rows="4" placeholder="Ex: What is mean by Human?"></textarea><br>
+<button onclick="ask()">Ask AI 🤖</button>
+<div id="ans">Dei kelvi kelu da! Naan ready!</div>
+<small>Powered by Free AI - No Login Needed</small>
+
 <script>
-const API_KEY="AQ.Ab8RN6J0yrVE6y-SkF727oDU4koU_QQX7IT1HG7Gtj6Z1ghZvQ";
 async function ask(){
-let qq=document.getElementById("q").value;
-let a=document.getElementById("ans");
-let b=document.getElementById("b");
-if(!qq){alert("Kelvi type pannu da!");return}
-b.innerText="⏳ Yosikuthu..."; a.innerText="Yosikuthu da...";
-try{
-let r=await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",{
-method:"POST",
-headers:{"Content-Type":"application/json","x-goog-api-key":API_KEY},
-body:JSON.stringify({contents:[{parts:[{text:qq}]}]})});
-let d=await r.json();
-if(d.error){a.innerText="❌ "+d.error.message; b.innerText="Ask AI 🤖"; return;}
-a.innerText=d.candidates[0].content.parts[0].text;
-}catch(e){a.innerText="❌ "+e.message}
-b.innerText="Ask AI 🤖";
+ let qq=document.getElementById("q").value;
+ let a=document.getElementById("ans");
+ if(!qq){a.innerText="Dei kelvi type pannu da!";return;}
+ a.innerText="⏳ Yoosikiren da Rafeeq...";
+ try{
+  let res=await fetch("https://text.pollinations.ai/"+encodeURIComponent(qq));
+  let text=await res.text();
+  a.innerText=text;
+ }catch(e){
+  a.innerText="Error da: "+e.message+" - Internet check pannu da!";
+ }
 }
 </script>
 </body>
