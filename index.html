@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Study Hub</title>
+<title>Raihan_xo Study's</title>
 <style>
 body{background:#0f172a;color:white;text-align:center;font-family:sans-serif;padding:20px}
 h1{color:#38bdf8;font-size:28px}
@@ -14,25 +14,24 @@ small{color:#94a3b8}
 </style>
 </head>
 <body>
-<h1>🔥 AI Study Hub 🔥</h1>
-<p>Vanakkam da! En AI website - NO KEY NEEDED!</p>
-<textarea id="q" rows="4" placeholder="Ex: What is mean by Human?"></textarea><br>
+<h1>🔥 Raihan_xo Study's 🔥</h1>
+<p>Vanakkam da! Raihan_xo-vin AI website!</p>
+<textarea id="q" rows="4" placeholder="Enna venum ketu da..."></textarea><br>
 <button onclick="ask()">Ask AI 🤖</button>
-<div id="ans">Dei kelvi kelu da! Naan ready!</div>
-<small>Powered by Free AI - No Login Needed</small>
-
+<div id="ans">Dei kelvi kelu da Raihan_xo!</div>
+<small>Powered by Raihan_xo AI - No Login Needed</small>
 <script>
 async function ask(){
  let qq=document.getElementById("q").value;
  let a=document.getElementById("ans");
  if(!qq){a.innerText="Dei kelvi type pannu da!";return;}
- a.innerText="⏳ Yoosikiren da Rafeeq...";
+ a.innerText="⏳ Yoosikiren da Raihan_xo...";
  try{
   let res=await fetch("https://text.pollinations.ai/"+encodeURIComponent(qq));
   let text=await res.text();
   a.innerText=text;
  }catch(e){
-  a.innerText="Error da: "+e.message+" - Internet check pannu da!";
+  a.innerText="Error da: "+e.message;
  }
 }
 </script>
