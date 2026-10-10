@@ -3,6 +3,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/png" href="favicon.png">
+<link rel="manifest" href="manifest.json">
 <title>Raihan_xo Study's</title>
 <style>
 body{background:#0f172a;color:white;text-align:center;font-family:sans-serif;padding:20px}
@@ -13,6 +14,11 @@ button:active{transform:scale(0.95)}
 #ans{background:#1e293b;padding:16px;border-radius:12px;max-width:600px;margin:25px auto;text-align:left;min-height:60px;white-space:pre-wrap;line-height:1.6}
 small{color:#94a3b8}
 </style>
+ <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
+  }
+</script>
 </head>
 <body>
 <h1>🔥 Raihan_xo Study's 🔥</h1>
